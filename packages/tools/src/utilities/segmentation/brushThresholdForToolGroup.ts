@@ -6,6 +6,7 @@ import getBrushToolInstances from './utilities';
 
 export function setBrushThresholdForToolGroup(
   toolGroupId: string,
+  thresholdKey: string,
   threshold: Types.Point2
 ) {
   const toolGroup = getToolGroup(toolGroupId);
@@ -17,7 +18,10 @@ export function setBrushThresholdForToolGroup(
   const brushBasedToolInstances = getBrushToolInstances(toolGroupId);
 
   brushBasedToolInstances.forEach((tool) => {
-    tool.configuration.strategySpecificConfiguration.THRESHOLD_INSIDE_CIRCLE.threshold =
+    if (!tool.configuration.strategySpecificConfiguration[thresholdKey]) {
+      tool.configuration.strategySpecificConfiguration[thresholdKey] = {};
+    }
+    tool.configuration.strategySpecificConfiguration[thresholdKey].threshold =
       threshold;
   });
 

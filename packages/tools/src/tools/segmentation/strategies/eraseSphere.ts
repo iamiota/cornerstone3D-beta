@@ -25,5 +25,5 @@ export function eraseInsideSphere(
     segmentIndex: 0,
   });
 
-  fillInsideSphere(enabledElement, eraseOperationData);
+  fillInsideSphere(enabledElement, eraseOperationData, 'ERASE_INSIDE_SPHERE');
 }

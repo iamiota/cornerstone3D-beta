@@ -22,7 +22,8 @@ function fillSphere(
   enabledElement: Types.IEnabledElement,
   operationData: OperationData,
   _inside = true,
-  threshold = false
+  threshold = false,
+  thresholdKey = 'FILL_INSIDE_SPHERE'
 ): void {
   const { viewport } = enabledElement;
   const {
@@ -48,7 +49,12 @@ function fillSphere(
       }
 
       if (
-        isWithinThreshold(index, imageVolume, strategySpecificConfiguration)
+        isWithinThreshold(
+          index,
+          imageVolume,
+          strategySpecificConfiguration,
+          thresholdKey
+        )
       ) {
         scalarData[index] = segmentIndex;
         scalarIndex.push(index);
@@ -93,9 +99,10 @@ function fillSphere(
  */
 export function fillInsideSphere(
   enabledElement: Types.IEnabledElement,
-  operationData: OperationData
+  operationData: OperationData,
+  thresholdKey: string
 ): void {
-  fillSphere(enabledElement, operationData, true);
+  fillSphere(enabledElement, operationData, true, true, thresholdKey);
 }
 
 /**
@@ -106,7 +113,8 @@ export function fillInsideSphere(
  */
 export function thresholdInsideSphere(
   enabledElement: Types.IEnabledElement,
-  operationData: OperationData
+  operationData: OperationData,
+  thresholdKey: string
 ): void {
   const { volume, imageVolume } = operationData;
 
@@ -119,7 +127,7 @@ export function thresholdInsideSphere(
     );
   }
 
-  fillSphere(enabledElement, operationData, true, true);
+  fillSphere(enabledElement, operationData, true, true, thresholdKey);
 }
 
 /**

@@ -88,7 +88,12 @@ function fillCircle(
       }
 
       if (
-        isWithinThreshold(index, imageVolume, strategySpecificConfiguration)
+        isWithinThreshold(
+          index,
+          imageVolume,
+          strategySpecificConfiguration,
+          'FILL_INSIDE_CIRCLE'
+        )
       ) {
         scalarData[index] = segmentIndex;
         //Todo: I don't think this will always be index 2 in streamingImageVolume?
